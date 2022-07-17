@@ -1,21 +1,4 @@
-/*!
-
-=========================================================
-* Black All React v1.2.1
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/black-dashboard-react
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/black-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-import React from "react";
+import {useState, useEffect} from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // react plugin used to create charts
@@ -44,17 +27,113 @@ import {
 
 // core components
 import {
-  chartExample1,
-  chartExample2,
+  totalSpendingChart,
+  artBoughtChart,
   chartExample3,
   chartExample4
 } from "variables/charts.js";
 
+
+
 function All(props) {
-  const [bigChartData, setbigChartData] = React.useState("data1");
-  const setBgChartData = (name) => {
-    setbigChartData(name);
-  };
+
+  const [loadingSpending, setLoadingSpending] = useState(false);
+  const [selectedSpendingChart, setSelectedSpendingChart] = useState("totalSpendingMonthly");
+  const [spendingData, setSpendingData] = useState();
+
+  const [loadingBought, setLoadingBought] = useState(false);
+  const [selectedBoughtChart, setSelectedBoughtChart] = useState("monthlyBoughtArt");
+  const [artBoughtData, setArtBoughtData] = useState();
+
+  const [loadingArtObjects, setLoadingArtObjects] = useState(false);
+  const [selectedArtObjectsChart, setSelectedArtObjectsChart] = useState("");
+  const [artObjectsData, setArtObjectsData] = useState();
+
+  const [loadingStatus, setLoadingStatus] = useState(false);
+  const [selectedStatusChart, setSelectedStatusChart] = useState("");
+  const [statusData, setStatusData] = useState();
+
+  // useEffect(() => {
+  //   fetch("https://api.example.com/items")
+  //     .then(res => res.json())
+  //     .then(
+  //       (result) => {
+  //         setLoadingSpending(false);
+  //         setSpendingData({
+  //           labels: [...result.labels],
+  //           datasets: [
+  //             {
+  //               label: "My First dataset",
+  //               fill: true,
+  //               backgroundColor: gradientStroke,
+  //               borderColor: "#1f8ef1",
+  //               borderWidth: 2,
+  //               borderDash: [],
+  //               borderDashOffset: 0.0,
+  //               pointBackgroundColor: "#1f8ef1",
+  //               pointBorderColor: "rgba(255,255,255,0)",
+  //               pointHoverBackgroundColor: "#1f8ef1",
+  //               pointBorderWidth: 20,
+  //               pointHoverRadius: 4,
+  //               pointHoverBorderWidth: 15,
+  //               pointRadius: 4,
+  //               data: [...result.data]
+  //             }
+  //           ]
+  //         });
+  //       },
+  //       (error) => {
+  //         setLoadingSpending(false);
+  //         console.log(error);
+  //       }
+  //     )
+  // }, [])
+
+  // useEffect(() => {
+  //   fetch("https://api.example.com/items")
+  //     .then(res => res.json())
+  //     .then(
+  //       (result) => {
+  //         setLoadingBought(false);
+  //         setArtBoughtData(result);
+  //       },
+  //       (error) => {
+  //         setLoadingSpending(false);
+  //         console.log(error);
+  //       }
+  //     )
+  // }, [])
+
+  // useEffect(() => {
+  //   fetch("https://api.example.com/items")
+  //     .then(res => res.json())
+  //     .then(
+  //       (result) => {
+  //         setLoadingArtObjects(false);
+  //         setArtObjectsData(result);
+  //       },
+  //       (error) => {
+  //         setLoadingSpending(false);
+  //         console.log(error);
+  //       }
+  //     )
+  // }, [])
+
+  // useEffect(() => {
+  //   fetch("https://api.example.com/items")
+  //     .then(res => res.json())
+  //     .then(
+  //       (result) => {
+  //         setLoadingStatus(false);
+  //         setStatusData(result);
+  //       },
+  //       (error) => {
+  //         setLoadingSpending(false);
+  //         console.log(error);
+  //       }
+  //     )
+  // }, [])
+
   return (
     <>
       <div className="content">
@@ -75,12 +154,12 @@ function All(props) {
                       <Button
                         tag="label"
                         className={classNames("btn-simple", {
-                          active: bigChartData === "data1"
+                          active: selectedSpendingChart === "totalSpendingMonthly"
                         })}
                         color="info"
-                        id="0"
+                        id="monthlySpent"
                         size="sm"
-                        onClick={() => setBgChartData("data1")}
+                        onClick={() => setSelectedSpendingChart("totalSpendingMonthly")}
                       >
                         <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
                           Mensal
@@ -91,13 +170,13 @@ function All(props) {
                       </Button>
                       <Button
                         color="info"
-                        id="1"
+                        id="annualSpent"
                         size="sm"
                         tag="label"
                         className={classNames("btn-simple", {
-                          active: bigChartData === "data2"
+                          active: selectedSpendingChart === "totalSpendingAnnual"
                         })}
-                        onClick={() => setBgChartData("data2")}
+                        onClick={() => setSelectedSpendingChart("totalSpendingAnnual")}
                       >
                         <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
                           Anual
@@ -112,10 +191,15 @@ function All(props) {
               </CardHeader>
               <CardBody>
                 <div className="chart-area">
-                  <Line
-                    data={chartExample1[bigChartData]}
-                    options={chartExample1.options}
-                  />
+                  {!loadingSpending
+                    ? (
+                      <Line
+                      data={totalSpendingChart[selectedSpendingChart]}
+                      options={totalSpendingChart.options}
+                      />
+                    )
+                    : (<h1>Loading...</h1>)
+                  }
                 </div>
               </CardBody>
             </Card>
@@ -135,12 +219,12 @@ function All(props) {
                   <Button
                     tag="label"
                     className={classNames("btn-simple", {
-                      active: bigChartData === "data1"
+                      active: selectedBoughtChart === "monthlyBoughtArt"
                     })}
                     color="info"
-                    id="0"
+                    id="boughtMonthly"
                     size="sm"
-                    onClick={() => setBgChartData("data1")}
+                    onClick={() => setSelectedBoughtChart("monthlyBoughtArt")}
                   >
                         <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
                           Mensal
@@ -151,13 +235,13 @@ function All(props) {
                   </Button>
                   <Button
                     color="info"
-                    id="1"
+                    id="boughtAnnual"
                     size="sm"
                     tag="label"
                     className={classNames("btn-simple", {
-                      active: bigChartData === "data2"
+                      active: selectedBoughtChart === "annualBoughtArt"
                     })}
-                    onClick={() => setBgChartData("data2")}
+                    onClick={() => setSelectedBoughtChart("annualBoughtArt")}
                   >
                         <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
                           Anual
@@ -179,6 +263,18 @@ function All(props) {
                   </tr>
                   </thead>
                   <tbody>
+                  {/*{ artBoughtChart[selectedBoughtChart]*/}
+                  {/*  ? artBoughtChart[selectedBoughtChart].map((eachItem) => {*/}
+                  {/*    return(*/}
+                  {/*      <tr>*/}
+                  {/*        <td>{eachItem.name}</td>*/}
+                  {/*        <td>{eachItem.country}</td>*/}
+                  {/*        <td>{eachItem.city}</td>*/}
+                  {/*        <td className="text-center">${eachItem.price}</td>*/}
+                  {/*      </tr>*/}
+                  {/*    )*/}
+                  {/*  })*/}
+                  {/*  : null}*/}
                   <tr>
                     <td>Dakota Rice</td>
                     <td>Niger</td>
@@ -298,19 +394,19 @@ function All(props) {
                   <Button
                     tag="label"
                     className={classNames("btn-simple", {
-                      active: bigChartData === "data1"
+                      active: selectedArtObjectsChart === "data1"
                     })}
                     color="info"
                     id="0"
                     size="sm"
-                    onClick={() => setBgChartData("data1")}
+                    onClick={() => setSelectedArtObjectsChart("data1")}
                   >
-                        <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
+                    <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
                           Pintura
-                        </span>
+                    </span>
                     <span className="d-block d-sm-none">
-                          <i className="tim-icons icon-single-02" />
-                        </span>
+                      <i className="tim-icons icon-single-02" />
+                    </span>
                   </Button>
                   <Button
                     color="info"
@@ -318,9 +414,9 @@ function All(props) {
                     size="sm"
                     tag="label"
                     className={classNames("btn-simple", {
-                      active: bigChartData === "data2"
+                      active: selectedArtObjectsChart === "data2"
                     })}
-                    onClick={() => setBgChartData("data2")}
+                    onClick={() => setSelectedArtObjectsChart("data2")}
                   >
                         <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
                           Escultura
@@ -335,16 +431,16 @@ function All(props) {
                     size="sm"
                     tag="label"
                     className={classNames("btn-simple", {
-                      active: bigChartData === "data2"
+                      active: selectedArtObjectsChart === "data3"
                     })}
-                    onClick={() => setBgChartData("data2")}
+                    onClick={() => setSelectedArtObjectsChart("data3")}
                   >
-                        <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
-                          Outros
-                        </span>
+                    <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
+                      Outros
+                    </span>
                     <span className="d-block d-sm-none">
-                          <i className="tim-icons icon-gift-2" />
-                        </span>
+                      <i className="tim-icons icon-gift-2" />
+                    </span>
                   </Button>
                 </ButtonGroup>
               </Col>
@@ -359,6 +455,18 @@ function All(props) {
                   </tr>
                   </thead>
                   <tbody>
+                  {/*{ artBoughtChart[selectedBoughtChart]*/}
+                  {/*  ? artBoughtChart[selectedBoughtChart].map((eachItem) => {*/}
+                  {/*    return(*/}
+                  {/*      <tr>*/}
+                  {/*        <td>{eachItem.name}</td>*/}
+                  {/*        <td>{eachItem.country}</td>*/}
+                  {/*        <td>{eachItem.city}</td>*/}
+                  {/*        <td className="text-center">${eachItem.price}</td>*/}
+                  {/*      </tr>*/}
+                  {/*    )*/}
+                  {/*  })*/}
+                  {/*  : null}*/}
                   <tr>
                     <td>Dakota Rice</td>
                     <td>Niger</td>
@@ -421,12 +529,12 @@ function All(props) {
                   <Button
                     tag="label"
                     className={classNames("btn-simple", {
-                      active: bigChartData === "data1"
+                      active: selectedStatusChart === "data1"
                     })}
                     color="info"
                     id="0"
                     size="sm"
-                    onClick={() => setBgChartData("data1")}
+                    onClick={() => setSelectedStatusChart("data1")}
                   >
                         <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
                           Emprestados
@@ -441,9 +549,9 @@ function All(props) {
                     size="sm"
                     tag="label"
                     className={classNames("btn-simple", {
-                      active: bigChartData === "data2"
+                      active: selectedStatusChart === "data2"
                     })}
-                    onClick={() => setBgChartData("data2")}
+                    onClick={() => setSelectedStatusChart("data2")}
                   >
                         <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
                           Permanente
@@ -465,6 +573,18 @@ function All(props) {
                     </tr>
                   </thead>
                   <tbody>
+                  {/*{ artBoughtChart[selectedBoughtChart]*/}
+                  {/*  ? artBoughtChart[selectedBoughtChart].map((eachItem) => {*/}
+                  {/*    return(*/}
+                  {/*      <tr>*/}
+                  {/*        <td>{eachItem.name}</td>*/}
+                  {/*        <td>{eachItem.country}</td>*/}
+                  {/*        <td>{eachItem.city}</td>*/}
+                  {/*        <td className="text-center">${eachItem.price}</td>*/}
+                  {/*      </tr>*/}
+                  {/*    )*/}
+                  {/*  })*/}
+                  {/*  : null}*/}
                     <tr>
                       <td>Dakota Rice</td>
                       <td>Niger</td>

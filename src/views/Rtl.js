@@ -44,7 +44,7 @@ import {
 
 // core components
 import {
-  chartExample1,
+  totalSpendingChart,
   chartExample2,
   chartExample3,
   chartExample4
@@ -130,8 +130,8 @@ function Rtl() {
               <CardBody>
                 <div className="chart-area">
                   <Line
-                    data={chartExample1[bigChartData]}
-                    options={chartExample1.options}
+                    data={totalSpendingChart[bigChartData]}
+                    options={totalSpendingChart.options}
                   />
                 </div>
               </CardBody>

@@ -44,7 +44,7 @@ import {
 
 // core components
 import {
-  chartExample1,
+  totalSpendingChart,
   chartExample2,
   chartExample3,
   chartExample4

@@ -73,8 +73,8 @@ let chart1_2_options = {
 // #########################################
 // // // used inside src/views/All.js
 // #########################################
-let chartExample1 = {
-  data1: (canvas) => {
+let totalSpendingChart = {
+  totalSpendingMonthly: (canvas) => {
     let ctx = canvas.getContext("2d");
 
     let gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
@@ -82,6 +82,20 @@ let chartExample1 = {
     gradientStroke.addColorStop(1, "rgba(29,140,248,0.2)");
     gradientStroke.addColorStop(0.4, "rgba(29,140,248,0.0)");
     gradientStroke.addColorStop(0, "rgba(29,140,248,0)"); //blue colors
+
+    let results;
+    let errors;
+
+    // fetch("https://api.example.com/items")
+    //   .then(res => res.json())
+    //   .then(
+    //     (result) => {
+    //       results = result;
+    //     },
+    //     (error) => {
+    //       errors = error;
+    //     }
+    //   )
 
     return {
       labels: [
@@ -119,7 +133,7 @@ let chartExample1 = {
       ]
     };
   },
-  data2: (canvas) => {
+  totalSpendingAnnual: (canvas) => {
     let ctx = canvas.getContext("2d");
 
     let gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
@@ -127,6 +141,20 @@ let chartExample1 = {
     gradientStroke.addColorStop(1, "rgba(29,140,248,0.2)");
     gradientStroke.addColorStop(0.4, "rgba(29,140,248,0.0)");
     gradientStroke.addColorStop(0, "rgba(29,140,248,0)"); //blue colors
+
+    let results;
+    let errors;
+
+    // fetch("https://api.example.com/items")
+    //   .then(res => res.json())
+    //   .then(
+    //     (result) => {
+    //       results = result;
+    //     },
+    //     (error) => {
+    //       errors = error;
+    //     }
+    //   )
 
     return {
       labels: [
@@ -164,7 +192,14 @@ let chartExample1 = {
       ]
     };
   },
-  data3: (canvas) => {
+  options: chart1_2_options
+};
+
+// #########################################
+// // // used inside src/views/All.js
+// #########################################
+let artBoughtChart = {
+  monthlyBoughtArt: (canvas) => {
     let ctx = canvas.getContext("2d");
 
     let gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
@@ -174,23 +209,10 @@ let chartExample1 = {
     gradientStroke.addColorStop(0, "rgba(29,140,248,0)"); //blue colors
 
     return {
-      labels: [
-        "JAN",
-        "FEB",
-        "MAR",
-        "APR",
-        "MAY",
-        "JUN",
-        "JUL",
-        "AUG",
-        "SEP",
-        "OCT",
-        "NOV",
-        "DEC"
-      ],
+      labels: ["JUL", "AUG", "SEP", "OCT", "NOV", "DEC"],
       datasets: [
         {
-          label: "My First dataset",
+          label: "Data",
           fill: true,
           backgroundColor: gradientStroke,
           borderColor: "#1f8ef1",
@@ -204,19 +226,12 @@ let chartExample1 = {
           pointHoverRadius: 4,
           pointHoverBorderWidth: 15,
           pointRadius: 4,
-          data: [60, 80, 65, 130, 80, 105, 90, 130, 70, 115, 60, 130]
+          data: [80, 100, 70, 80, 120, 80]
         }
       ]
     };
   },
-  options: chart1_2_options
-};
-
-// #########################################
-// // // used inside src/views/All.js
-// #########################################
-let chartExample2 = {
-  data: (canvas) => {
+  annualBoughtArt: (canvas) => {
     let ctx = canvas.getContext("2d");
 
     let gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
@@ -420,8 +435,8 @@ const chartExample4 = {
 };
 
 module.exports = {
-  chartExample1, // in src/views/All.js
-  chartExample2, // in src/views/All.js
+  totalSpendingChart: totalSpendingChart, // in src/views/All.js
+  artBoughtChart: artBoughtChart, // in src/views/All.js
   chartExample3, // in src/views/All.js
   chartExample4 // in src/views/All.js
 };
