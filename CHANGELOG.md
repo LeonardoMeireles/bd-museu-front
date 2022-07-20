@@ -15,7 +15,7 @@
 
 ### Major style changes
 
-- All Bootstrap imports from `src/assets/scss/black-dashboard-react/bootstrap` have been changed with imports from `node_modules` from `Bootstrap`
+- Money Bootstrap imports from `src/assets/scss/black-dashboard-react/bootstrap` have been changed with imports from `node_modules` from `Bootstrap`
 
 ### Deleted components
 

@@ -1,7 +1,7 @@
 /*!
 
 =========================================================
-* Black All React v1.2.1
+* Black Money React v1.2.1
 =========================================================
 
 * Product Page: https://www.creative-tim.com/product/black-dashboard-react
@@ -284,7 +284,7 @@ const MapWrapper = () => {
     });
 
     const contentString =
-      '<div class="info-window-content"><h2>BLK All React</h2>' +
+      '<div class="info-window-content"><h2>BLK Money React</h2>' +
       "<p>A freebie Admin for ReactStrap, Bootstrap, React, and React Hooks.</p></div>";
 
     const infowindow = new google.maps.InfoWindow({

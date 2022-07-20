@@ -1,7 +1,7 @@
 /*!
 
 =========================================================
-* Black All React v1.2.1
+* Black Money React v1.2.1
 =========================================================
 
 * Product Page: https://www.creative-tim.com/product/black-dashboard-react
@@ -15,7 +15,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
+import React, {useEffect, useState} from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // react plugin used to create charts
@@ -55,6 +55,26 @@ function Dashboard(props) {
   const setBgChartData = (name) => {
     setbigChartData(name);
   };
+
+  const [loadingCollections, setLoadingCollections] = useState(false);
+  const [selectedCollectionsChart, setSelectedCollectionsChart] = useState("");
+  const [collectionsData, setCollectionsData] = useState();
+
+  useEffect(() => {
+    fetch("http://localhost:8080/collection")
+      .then(res => res.json())
+      .then(
+        (result) => {
+          setLoadingCollections(false);
+          setCollectionsData(result);
+        },
+        (error) => {
+          setLoadingCollections(false);
+          console.log(error);
+        }
+      )
+  }, [])
+
   return (
     <>
       <div className="content">
@@ -78,7 +98,7 @@ function Dashboard(props) {
                           active: bigChartData === "data1"
                         })}
                         color="info"
-                        id="0"
+                        id="collection-0"
                         size="sm"
                         onClick={() => setBgChartData("data1")}
                       >
@@ -91,7 +111,7 @@ function Dashboard(props) {
                       </Button>
                       <Button
                         color="info"
-                        id="1"
+                        id="collection-1"
                         size="sm"
                         tag="label"
                         className={classNames("btn-simple", {

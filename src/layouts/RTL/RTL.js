@@ -1,7 +1,7 @@
 /*!
 
 =========================================================
-* Black All React v1.2.1
+* Black Money React v1.2.1
 =========================================================
 
 * Product Page: https://www.creative-tim.com/product/black-dashboard-react
@@ -41,7 +41,7 @@ function RTL(props) {
   );
   React.useEffect(() => {
     if (navigator.platform.indexOf("Win") > -1) {
-      document.documentElement.className += " perfect-scrollbar-on";
+      document.documentElement.className += " perfect-scrollbar-off";
       document.documentElement.classList.remove("perfect-scrollbar-off");
       ps = new PerfectScrollbar(mainPanelRef.current, {
         suppressScrollX: false
@@ -142,13 +142,9 @@ function RTL(props) {
                   sidebarOpened={sidebarOpened}
                 />
                 <Switch>{getRoutes(routes)}</Switch>
-                {
-                  // we don't want the Footer to be rendered on map page
-                  location.pathname === "/admin/maps" ? null : <Footer fluid />
-                }
               </div>
             </div>
-            <FixedPlugin bgColor={color} handleBgClick={changeColor} />
+            {/*<FixedPlugin bgColor={color} handleBgClick={changeColor} />*/}
           </React.Fragment>
         )}
       </BackgroundColorContext.Consumer>

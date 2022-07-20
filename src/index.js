@@ -1,7 +1,7 @@
 /*!
 
 =========================================================
-* Black All React v1.2.1
+* Black Money React v1.2.1
 =========================================================
 
 * Product Page: https://www.creative-tim.com/product/black-dashboard-react
@@ -39,7 +39,7 @@ root.render(
         <Switch>
           <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
           <Route path="/rtl" render={(props) => <RTLLayout {...props} />} />
-          <Redirect from="/" to="/admin/todos" />
+          <Redirect from="/" to="/admin/gastos" />
         </Switch>
       </BrowserRouter>
     </BackgroundColorWrapper>

@@ -1,7 +1,7 @@
 /*!
 
 =========================================================
-* Black All React v1.2.1
+* Black Money React v1.2.1
 =========================================================
 
 * Product Page: https://www.creative-tim.com/product/black-dashboard-react

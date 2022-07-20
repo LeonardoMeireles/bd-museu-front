@@ -1,7 +1,7 @@
 /*!
 
 =========================================================
-* Black All React v1.2.1
+* Black Money React v1.2.1
 =========================================================
 
 * Product Page: https://www.creative-tim.com/product/black-dashboard-react
@@ -71,17 +71,17 @@ let chart1_2_options = {
 };
 
 // #########################################
-// // // used inside src/views/All.js
+// // // used inside src/views/Money.js
 // #########################################
 let totalSpendingChart = {
   totalSpendingMonthly: (canvas) => {
     let ctx = canvas.getContext("2d");
 
-    let gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
+    let gradientStroke = ctx.createLinearGradient(0, 230, 10, 50);
 
-    gradientStroke.addColorStop(1, "rgba(29,140,248,0.2)");
-    gradientStroke.addColorStop(0.4, "rgba(29,140,248,0.0)");
-    gradientStroke.addColorStop(0, "rgba(29,140,248,0)"); //blue colors
+    gradientStroke.addColorStop(1, "rgba(14, 122, 0,0.2)");
+    gradientStroke.addColorStop(0.4, "rgba(14, 122, 0,0.0)");
+    gradientStroke.addColorStop(0, "rgba(14, 122, 0,0)"); //blue colors
 
     let results;
     let errors;
@@ -106,29 +106,24 @@ let totalSpendingChart = {
         "MAY",
         "JUN",
         "JUL",
-        "AUG",
-        "SEP",
-        "OCT",
-        "NOV",
-        "DEC"
       ],
       datasets: [
         {
-          label: "My First dataset",
+          label: "Quantidade gasta esse Ano",
           fill: true,
           backgroundColor: gradientStroke,
-          borderColor: "#1f8ef1",
+          borderColor: "#3fd44e",
           borderWidth: 2,
           borderDash: [],
           borderDashOffset: 0.0,
-          pointBackgroundColor: "#1f8ef1",
-          pointBorderColor: "rgba(255,255,255,0)",
-          pointHoverBackgroundColor: "#1f8ef1",
+          pointBackgroundColor: "#3fd44e",
+          pointBorderColor: "rgba(14, 122, 0,0)",
+          pointHoverBackgroundColor: "#3fd44e",
           pointBorderWidth: 20,
           pointHoverRadius: 4,
           pointHoverBorderWidth: 15,
           pointRadius: 4,
-          data: [100, 70, 90, 70, 85, 60, 75, 60, 90, 80, 110, 100]
+          data: [1020, 2420, 700, 900, 1100, 3500, 3214]
         }
       ]
     };
@@ -136,11 +131,11 @@ let totalSpendingChart = {
   totalSpendingAnnual: (canvas) => {
     let ctx = canvas.getContext("2d");
 
-    let gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
+    let gradientStroke = ctx.createLinearGradient(0, 230, 10, 50);
 
-    gradientStroke.addColorStop(1, "rgba(29,140,248,0.2)");
-    gradientStroke.addColorStop(0.4, "rgba(29,140,248,0.0)");
-    gradientStroke.addColorStop(0, "rgba(29,140,248,0)"); //blue colors
+    gradientStroke.addColorStop(1, "rgba(14, 122, 0,0.2)");
+    gradientStroke.addColorStop(0.4, "rgba(14, 122, 0,0.0)");
+    gradientStroke.addColorStop(0, "rgba(14, 122, 0,0)"); //blue colors
 
     let results;
     let errors;
@@ -158,6 +153,43 @@ let totalSpendingChart = {
 
     return {
       labels: [
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+      ],
+      datasets: [
+        {
+          label: "Quantidade gasta em Reais",
+          fill: true,
+          backgroundColor: gradientStroke,
+          borderColor: "#3fd44e",
+          borderWidth: 2,
+          borderDash: [],
+          borderDashOffset: 0.0,
+          pointBackgroundColor: "#3fd44e",
+          pointBorderColor: "rgba(14, 122, 0,0)",
+          pointHoverBackgroundColor: "#3fd44e",
+          pointBorderWidth: 20,
+          pointHoverRadius: 4,
+          pointHoverBorderWidth: 15,
+          pointRadius: 4,
+          data: [11300, 93000, 71550, 12854] //, 93000, 42500, 8230, 5456, 20203, 11392, 46572, 31654
+        }
+      ]
+    };
+  },
+  totalSpendingBorrowed: (canvas) => {
+    let ctx = canvas.getContext("2d");
+
+    let gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
+
+    gradientStroke.addColorStop(1, "rgba(29,140,248,0.2)");
+    gradientStroke.addColorStop(0.4, "rgba(29,140,248,0.0)");
+    gradientStroke.addColorStop(0, "rgba(29,140,248,0)"); //blue colors
+
+    return {
+      labels: [
         "JAN",
         "FEB",
         "MAR",
@@ -165,15 +197,10 @@ let totalSpendingChart = {
         "MAY",
         "JUN",
         "JUL",
-        "AUG",
-        "SEP",
-        "OCT",
-        "NOV",
-        "DEC"
       ],
       datasets: [
         {
-          label: "My First dataset",
+          label: "Quantidade gasta em Reais",
           fill: true,
           backgroundColor: gradientStroke,
           borderColor: "#1f8ef1",
@@ -187,7 +214,47 @@ let totalSpendingChart = {
           pointHoverRadius: 4,
           pointHoverBorderWidth: 15,
           pointRadius: 4,
-          data: [80, 120, 105, 110, 95, 105, 90, 100, 80, 95, 70, 120]
+          data: [4300, 6000, 25550, 4250, 18500, 41250, 22115]
+        }
+      ]
+    };
+  },
+  totalSpendingOwned: (canvas) => {
+    let ctx = canvas.getContext("2d");
+
+    let gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
+
+    gradientStroke.addColorStop(1, "rgba(29,140,248,0.2)");
+    gradientStroke.addColorStop(0.4, "rgba(29,140,248,0.0)");
+    gradientStroke.addColorStop(0, "rgba(29,140,248,0)"); //blue colors
+
+    return {
+      labels: [
+        "JAN",
+        "FEB",
+        "MAR",
+        "APR",
+        "MAY",
+        "JUN",
+        "JUL",
+      ],
+      datasets: [
+        {
+          label: "Quantidade gasta em Reais",
+          fill: true,
+          backgroundColor: gradientStroke,
+          borderColor: "#1f8ef1",
+          borderWidth: 2,
+          borderDash: [],
+          borderDashOffset: 0.0,
+          pointBackgroundColor: "#1f8ef1",
+          pointBorderColor: "rgba(255,255,255,0)",
+          pointHoverBackgroundColor: "#1f8ef1",
+          pointBorderWidth: 20,
+          pointHoverRadius: 4,
+          pointHoverBorderWidth: 15,
+          pointRadius: 4,
+          data: [5300, 5000, 35550, 6250, 46500, 21250, 4115]
         }
       ]
     };
@@ -196,7 +263,7 @@ let totalSpendingChart = {
 };
 
 // #########################################
-// // // used inside src/views/All.js
+// // // used inside src/views/Money.js
 // #########################################
 let artBoughtChart = {
   monthlyBoughtArt: (canvas) => {
@@ -267,7 +334,7 @@ let artBoughtChart = {
 };
 
 // #########################################
-// // // used inside src/views/All.js
+// // // used inside src/views/Money.js
 // #########################################
 let chartExample3 = {
   data: (canvas) => {
@@ -280,10 +347,10 @@ let chartExample3 = {
     gradientStroke.addColorStop(0, "rgba(119,52,169,0)"); //purple colors
 
     return {
-      labels: ["Coleção 1", "Coleção 2", "Coleção 3", "Coleção 4", "Coleção 5", "Coleção 6"],
+      labels: ["Paul Allen", "Itau", "MASP", "François Pinault", "Adrian Cheng"],
       datasets: [
         {
-          label: "Coleções",
+          label: "Objetos de Arte",
           fill: true,
           backgroundColor: gradientStroke,
           hoverBackgroundColor: gradientStroke,
@@ -291,7 +358,33 @@ let chartExample3 = {
           borderWidth: 2,
           borderDash: [],
           borderDashOffset: 0.0,
-          data: [53, 20, 10, 80, 100, 45]
+          data: [3, 2, 2, 5, 1, 3]
+        }
+      ]
+    };
+  },
+  artObjects: (canvas) => {
+    let ctx = canvas.getContext("2d");
+
+    let gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
+
+    gradientStroke.addColorStop(1, "rgba(72,72,176,0.1)");
+    gradientStroke.addColorStop(0.4, "rgba(72,72,176,0.0)");
+    gradientStroke.addColorStop(0, "rgba(119,52,169,0)"); //purple colors
+
+    return {
+      labels: ["Pintura", "Escultura", "Outros"],
+      datasets: [
+        {
+          label: "Objetos de Arte",
+          fill: true,
+          backgroundColor: gradientStroke,
+          hoverBackgroundColor: gradientStroke,
+          borderColor: "#d048b6",
+          borderWidth: 2,
+          borderDash: [],
+          borderDashOffset: 0.0,
+          data: [9, 2, 5]
         }
       ]
     };
@@ -346,7 +439,7 @@ let chartExample3 = {
 };
 
 // #########################################
-// // // used inside src/views/All.js
+// // // used inside src/views/Money.js
 // #########################################
 const chartExample4 = {
   data: (canvas) => {
@@ -359,10 +452,10 @@ const chartExample4 = {
     gradientStroke.addColorStop(0, "rgba(66,134,121,0)"); //green colors
 
     return {
-      labels: ["JUL", "AUG", "SEP", "OCT", "NOV"],
+      labels: ["Emprestados", "Permanentes"],
       datasets: [
         {
-          label: "My First dataset",
+          label: "Número de Objetos de Arte",
           fill: true,
           backgroundColor: gradientStroke,
           borderColor: "#00d6b4",
@@ -376,7 +469,7 @@ const chartExample4 = {
           pointHoverRadius: 4,
           pointHoverBorderWidth: 15,
           pointRadius: 4,
-          data: [90, 27, 60, 12, 80]
+          data: [5, 11]
         }
       ]
     };
@@ -435,8 +528,8 @@ const chartExample4 = {
 };
 
 module.exports = {
-  totalSpendingChart: totalSpendingChart, // in src/views/All.js
-  artBoughtChart: artBoughtChart, // in src/views/All.js
-  chartExample3, // in src/views/All.js
-  chartExample4 // in src/views/All.js
+  totalSpendingChart: totalSpendingChart, // in src/views/Money.js
+  artBoughtChart: artBoughtChart, // in src/views/Money.js
+  chartExample3, // in src/views/Money.js
+  chartExample4 // in src/views/Money.js
 };

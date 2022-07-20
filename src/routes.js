@@ -1,7 +1,7 @@
 /*!
 
 =========================================================
-* Black All React v1.2.1
+* Black Money React v1.2.1
 =========================================================
 
 * Product Page: https://www.creative-tim.com/product/black-dashboard-react
@@ -15,8 +15,11 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import All from "views/All.js";
+import Money from "views/Money.js";
 import Collections from "views/Collections.js";
+import Art from "views/Art.js";
+import Status from "views/Status.js";
+
 import Icons from "views/Icons.js";
 import Map from "views/Map.js";
 import Notifications from "views/Notifications.js";
@@ -27,11 +30,27 @@ import UserProfile from "views/UserProfile.js";
 
 var routes = [
   {
-    path: "/todos",
-    name: "Todos",
+    path: "/gastos",
+    name: "Gastos",
+    rtlName: "لوحة القيادة",
+    icon: "tim-icons icon-money-coins",
+    component: Money,
+    layout: "/admin"
+  },
+  {
+    path: "/arte",
+    name: "Arte",
     rtlName: "لوحة القيادة",
     icon: "tim-icons icon-palette",
-    component: All,
+    component: Art,
+    layout: "/admin"
+  },
+  {
+    path: "/status",
+    name: "Status",
+    rtlName: "لوحة القيادة",
+    icon: "tim-icons icon-book-bookmark",
+    component: Status,
     layout: "/admin"
   },
   {
