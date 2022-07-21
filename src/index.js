@@ -18,6 +18,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import {cors} from "cors"
 
 import AdminLayout from "layouts/Admin/Admin.js";
 import RTLLayout from "layouts/RTL/RTL.js";

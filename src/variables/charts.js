@@ -358,6 +358,32 @@ let chartExample3 = {
           borderWidth: 2,
           borderDash: [],
           borderDashOffset: 0.0,
+          data: [1, 0, 2, 3, 1, 0]
+        }
+      ]
+    };
+  },
+  data2: (canvas) => {
+    let ctx = canvas.getContext("2d");
+
+    let gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
+
+    gradientStroke.addColorStop(1, "rgba(72,72,176,0.1)");
+    gradientStroke.addColorStop(0.4, "rgba(72,72,176,0.0)");
+    gradientStroke.addColorStop(0, "rgba(119,52,169,0)"); //purple colors
+
+    return {
+      labels: ["Paul Allen", "Itau", "MASP", "François Pinault", "Adrian Cheng"],
+      datasets: [
+        {
+          label: "Objetos de Arte",
+          fill: true,
+          backgroundColor: gradientStroke,
+          hoverBackgroundColor: gradientStroke,
+          borderColor: "#d048b6",
+          borderWidth: 2,
+          borderDash: [],
+          borderDashOffset: 0.0,
           data: [3, 2, 2, 5, 1, 3]
         }
       ]

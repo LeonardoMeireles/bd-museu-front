@@ -37,15 +37,51 @@ function All(props) {
 
   const [loadingArtObjects, setLoadingArtObjects] = useState(false);
   const [selectedArtObjectsChart, setSelectedArtObjectsChart] = useState("data1");
+
   const [artObjectsData, setArtObjectsData] = useState();
+  const [paintingData, setPaintingData] = useState();
+  const [sculptureData, setSculptureData] = useState();
+  const [othersData, setOthersData] = useState();
 
   useEffect(() => {
-    fetch("http://localhost:8080/art-object")
+    fetch("http://localhost:8080/painting")
       .then(res => res.json())
       .then(
         (result) => {
           setLoadingArtObjects(false);
-          setArtObjectsData(result);
+          setPaintingData(result);
+        },
+        (error) => {
+          setLoadingArtObjects(false);
+          console.log(error);
+        }
+      )
+  }, [])
+
+  useEffect(() => {
+    fetch("http://localhost:8080/sculpture")
+      .then(res => res.json())
+      .then(
+        (result) => {
+          console.log(result)
+          setLoadingArtObjects(false);
+          setSculptureData(result);
+        },
+        (error) => {
+          setLoadingArtObjects(false);
+          console.log(error);
+        }
+      )
+  }, [])
+
+  useEffect(() => {
+    fetch("http://localhost:8080/other")
+      .then(res => res.json())
+      .then(
+        (result) => {
+          console.log(result)
+          setLoadingArtObjects(false);
+          setOthersData(result);
         },
         (error) => {
           setLoadingArtObjects(false);
@@ -70,10 +106,32 @@ function All(props) {
               </CardHeader>
               <CardBody>
                 <div className="chart-area">
-                  {!loadingArtObjects
+                  {!loadingArtObjects && paintingData && othersData && sculptureData
                     ? (
                       <Bar
-                      data={chartExample3["artObjects"]}
+                      data={
+                        {
+                          labels: ["Pintura", "Escultura", "Outros"],
+                          datasets: [
+                            {
+                              label: "Something",
+                              fill: true,
+                              borderColor: "#1f8ef1",
+                              borderWidth: 2,
+                              borderDash: [],
+                              borderDashOffset: 0.0,
+                              pointBackgroundColor: "#1f8ef1",
+                              pointBorderColor: "rgba(255,255,255,0)",
+                              pointHoverBackgroundColor: "#1f8ef1",
+                              pointBorderWidth: 20,
+                              pointHoverRadius: 4,
+                              pointHoverBorderWidth: 15,
+                              pointRadius: 4,
+                              data: [paintingData.length, sculptureData.length, othersData.length]
+                            }
+                          ]
+                        }
+                      }
                       options={totalSpendingChart.options}
                       />
                     )
@@ -121,44 +179,7 @@ function All(props) {
                       active: selectedArtObjectsChart === "data2"
                     })}
                     onClick={() => {
-                      setArtObjectsData([
-                        {
-                          id: 1,
-                          title: 'Operários',
-                          artistName: 'Tarsila do Amaral',
-                          price: 50200
-                        },
-                        {
-                          id: 2,
-                          title: 'Operários',
-                          artistName: 'Tarsila do Amaral',
-                          price: 50200
-                        },
-                        {
-                          id: 3,
-                          title: 'Operários',
-                          artistName: 'Tarsila do Amaral',
-                          price: 50200
-                        },
-                        {
-                          id: 4,
-                          title: 'Operários',
-                          artistName: 'Tarsila do Amaral',
-                          price: 50200
-                        },
-                        {
-                          id: 5,
-                          title: 'Operários',
-                          artistName: 'Tarsila do Amaral',
-                          price: 50200
-                        },
-                        {
-                          id: 6,
-                          title: 'Operários',
-                          artistName: 'Tarsila do Amaral',
-                          price: 50200
-                        },
-                      ])
+                      setArtObjectsData([])
                       setSelectedArtObjectsChart("data2")
                     }}
                   >
@@ -178,44 +199,7 @@ function All(props) {
                       active: selectedArtObjectsChart === "data3"
                     })}
                     onClick={() => {
-                      setArtObjectsData([
-                        {
-                          id: 1,
-                          title: 'Operários',
-                          artistName: 'Tarsila do Amaral',
-                          price: 50200
-                        },
-                        {
-                          id: 2,
-                          title: 'Operários',
-                          artistName: 'Tarsila do Amaral',
-                          price: 50200
-                        },
-                        {
-                          id: 3,
-                          title: 'Operários',
-                          artistName: 'Tarsila do Amaral',
-                          price: 50200
-                        },
-                        {
-                          id: 4,
-                          title: 'Operários',
-                          artistName: 'Tarsila do Amaral',
-                          price: 50200
-                        },
-                        {
-                          id: 5,
-                          title: 'Operários',
-                          artistName: 'Tarsila do Amaral',
-                          price: 50200
-                        },
-                        {
-                          id: 6,
-                          title: 'Operários',
-                          artistName: 'Tarsila do Amaral',
-                          price: 50200
-                        },
-                      ])
+                      setArtObjectsData([])
                       setSelectedArtObjectsChart("data3")
                     }}
                   >
@@ -230,73 +214,142 @@ function All(props) {
               </Col>
               <CardBody>
                 <Table className="tablesorter" responsive hover>
+                  { selectedArtObjectsChart === "data1" && (
                   <thead className="text-primary">
-                  <tr>
-                    <th>Id</th>
-                    <th>Year</th>
-                    <th>Origin</th>
-                    <th>Title</th>
-                    <th>Description</th>
-                    <th>Period</th>
-                    <th>Artist Name</th>
-                    <th className="text-center">Salary</th>
-                  </tr>
+                    <tr>
+                      <th>ID</th>
+                      <th>Altura</th>
+                      <th>material</th>
+                      <th>Estilo</th>
+                    </tr>
                   </thead>
+                  )}
+                  { selectedArtObjectsChart === "data2" && (
+                    <thead className="text-primary">
+                    <tr>
+                    <th>ID</th>
+                    <th>Altura</th>
+                    <th>Peso</th>
+                    <th>Material</th>
+                    <th>Estilo</th>
+                    </tr>
+                    </thead>
+                    )}
+                  { selectedArtObjectsChart === "data3" && (
+                    <thead className="text-primary">
+                    <tr>
+                    <th>ID</th>
+                    <th>Altura</th>
+                    <th>Peso</th>
+                    <th>Material</th>
+                    <th>Estilo</th>
+                    </tr>
+                    </thead>
+                    )
+                  }
                   <tbody>
-                  { artObjectsData
-                    ? artObjectsData.map((eachItem) => {
+                  { selectedArtObjectsChart === "data1" && paintingData
+                    && paintingData.map((eachItem) => {
                       return(
                         <tr>
-                          <td>{eachItem.name}</td>
-                          <td>{eachItem.country}</td>
-                          <td>{eachItem.city}</td>
-                          <td className="text-center">${eachItem.price}</td>
+                          <td>{eachItem.id}</td>
+                          <td>{eachItem.paint}</td>
+                          <td>{eachItem.style}</td>
+                          <td>{eachItem.support} KG</td>
                         </tr>
                       )
                     })
-                    : null}
-                  <tr>
-                    <td>Dakota Rice</td>
-                    <td>Niger</td>
-                    <td>Oud-Turnhout</td>
-                    <td className="text-center">$36,738</td>
-                  </tr>
-                  <tr>
-                    <td>Minerva Hooper</td>
-                    <td>Curaçao</td>
-                    <td>Sinaai-Waas</td>
-                    <td className="text-center">$23,789</td>
-                  </tr>
-                  <tr>
-                    <td>Sage Rodriguez</td>
-                    <td>Netherlands</td>
-                    <td>Baileux</td>
-                    <td className="text-center">$56,142</td>
-                  </tr>
-                  <tr>
-                    <td>Philip Chaney</td>
-                    <td>Korea, South</td>
-                    <td>Overland Park</td>
-                    <td className="text-center">$38,735</td>
-                  </tr>
-                  <tr>
-                    <td>Doris Greene</td>
-                    <td>Malawi</td>
-                    <td>Feldkirchen in Kärnten</td>
-                    <td className="text-center">$63,542</td>
-                  </tr>
-                  <tr>
-                    <td>Mason Porter</td>
-                    <td>Chile</td>
-                    <td>Gloucester</td>
-                    <td className="text-center">$78,615</td>
-                  </tr>
-                  <tr>
-                    <td>Jon Porter</td>
-                    <td>Portugal</td>
-                    <td>Gloucester</td>
-                    <td className="text-center">$98,615</td>
-                  </tr>
+                  }
+                  { selectedArtObjectsChart === "data2" && sculptureData
+                    && sculptureData.map((eachItem) => {
+                    return(
+                    <tr>
+                    <td>{eachItem.id}</td>
+                    <td>{eachItem.height}</td>
+                    <td>{eachItem.weight}KG</td>
+                    <td>{eachItem.material}</td>
+                      <td>{eachItem.style}</td>
+
+                    </tr>
+                    )
+                  })
+                  }
+                  { selectedArtObjectsChart === "data3" && othersData
+                    && othersData.map((eachItem) => {
+                    return(
+                    <tr>
+                    <td>{eachItem.id}</td>
+                      <td>{eachItem.height}</td>
+                      <td>{eachItem.weight}KG</td>
+                      <td>{eachItem.material}</td>
+                      <td>{eachItem.style}</td>
+                    </tr>
+                    )
+                  })
+                  }
+                  {/*<tr>*/}
+                  {/*  <td>01</td>*/}
+                  {/*  <td>1517</td>*/}
+                  {/*  <td>Manaus</td>*/}
+                  {/*  <td>Saint Peter</td>*/}
+                  {/*  <td>Uma arte mais do que...</td>*/}
+                  {/*  <td>Renascentista</td>*/}
+                  {/*  <td>Donatelo</td>*/}
+                  {/*</tr>*/}
+                  {/*<tr>*/}
+                  {/*  <td>01</td>*/}
+                  {/*  <td>1517</td>*/}
+                  {/*  <td>Manaus</td>*/}
+                  {/*  <td>Saint Peter</td>*/}
+                  {/*  <td>Uma arte mais do que...</td>*/}
+                  {/*  <td>Renascentista</td>*/}
+                  {/*  <td>Donatelo</td>*/}
+                  {/*</tr>*/}
+                  {/*<tr>*/}
+                  {/*  <td>01</td>*/}
+                  {/*  <td>1517</td>*/}
+                  {/*  <td>Manaus</td>*/}
+                  {/*  <td>Saint Peter</td>*/}
+                  {/*  <td>Uma arte mais do que...</td>*/}
+                  {/*  <td>Renascentista</td>*/}
+                  {/*  <td>Donatelo</td>*/}
+                  {/*</tr>*/}
+                  {/*<tr>*/}
+                  {/*<td>01</td>*/}
+                  {/*<td>1517</td>*/}
+                  {/*<td>Manaus</td>*/}
+                  {/*<td>Saint Peter</td>*/}
+                  {/*<td>Uma arte mais do que...</td>*/}
+                  {/*<td>Renascentista</td>*/}
+                  {/*<td>Donatelo</td>*/}
+                  {/*</tr>*/}
+                  {/*<tr>*/}
+                  {/*  <td>01</td>*/}
+                  {/*  <td>1517</td>*/}
+                  {/*  <td>Manaus</td>*/}
+                  {/*  <td>Saint Peter</td>*/}
+                  {/*  <td>Uma arte mais do que...</td>*/}
+                  {/*  <td>Renascentista</td>*/}
+                  {/*  <td>Donatelo</td>*/}
+                  {/*</tr>*/}
+                  {/*<tr>*/}
+                  {/*  <td>01</td>*/}
+                  {/*  <td>1517</td>*/}
+                  {/*  <td>Manaus</td>*/}
+                  {/*  <td>Saint Peter</td>*/}
+                  {/*  <td>Uma arte mais do que...</td>*/}
+                  {/*  <td>Renascentista</td>*/}
+                  {/*  <td>Donatelo</td>*/}
+                  {/*</tr>*/}
+                  {/*<tr>*/}
+                  {/*  <td>01</td>*/}
+                  {/*  <td>1517</td>*/}
+                  {/*  <td>Manaus</td>*/}
+                  {/*  <td>Saint Peter</td>*/}
+                  {/*  <td>Uma arte mais do que...</td>*/}
+                  {/*  <td>Renascentista</td>*/}
+                  {/*  <td>Donatelo</td>*/}
+                  {/*</tr>*/}
                   </tbody>
                 </Table>
               </CardBody>

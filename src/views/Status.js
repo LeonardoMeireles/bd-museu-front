@@ -39,15 +39,31 @@ function All(props) {
 
   const [loadingStatus, setLoadingStatus] = useState(false);
   const [selectedStatusChart, setSelectedStatusChart] = useState("data4");
-  const [statusData, setStatusData] = useState();
+  const [permanentData, setPermanentData] = useState();
+  const [borrowedData, setBorrowedData] = useState();
 
   useEffect(() => {
-    fetch("http://localhost:8080/items")
+    fetch("http://localhost:8080/borrowed/objects")
       .then(res => res.json())
       .then(
         (result) => {
           setLoadingStatus(false);
-          setStatusData(result);
+          setBorrowedData(result);
+        },
+        (error) => {
+          setLoadingStatus(false);
+          console.log(error);
+        }
+      )
+  }, [])
+
+  useEffect(() => {
+    fetch("http://localhost:8080/permanent-collection/objects")
+      .then(res => res.json())
+      .then(
+        (result) => {
+          setLoadingStatus(false);
+          setPermanentData(result);
         },
         (error) => {
           setLoadingStatus(false);
@@ -72,10 +88,32 @@ function All(props) {
               </CardHeader>
               <CardBody>
                 <div className="chart-area">
-                  {!loadingStatus
+                  {!loadingStatus && permanentData && borrowedData
                     ? (
                       <Bar
-                      data={chartExample4["data"]}
+                      data={
+                        {
+                          labels: ["Emprestados", "Permanentes"],
+                          datasets: [
+                            {
+                              label: "Número de Objetos de Arte",
+                              fill: true,
+                              borderColor: "#00d6b4",
+                              borderWidth: 2,
+                              borderDash: [],
+                              borderDashOffset: 0.0,
+                              pointBackgroundColor: "#00d6b4",
+                              pointBorderColor: "rgba(255,255,255,0)",
+                              pointHoverBackgroundColor: "#00d6b4",
+                              pointBorderWidth: 20,
+                              pointHoverRadius: 4,
+                              pointHoverBorderWidth: 15,
+                              pointRadius: 4,
+                              data: [borrowedData.length, permanentData.length]
+                            }
+                          ]
+                        }
+                      }
                       options={totalSpendingChart.options}
                       />
                     )
@@ -106,44 +144,7 @@ function All(props) {
                       active: setSelectedStatusChart === "data4"
                     })}
                     onClick={() => {
-                      setStatusData([
-                        {
-                          id: 1,
-                          title: 'Operários',
-                          artistName: 'Tarsila do Amaral',
-                          price: 50200
-                        },
-                        {
-                          id: 2,
-                          title: 'Operários',
-                          artistName: 'Tarsila do Amaral',
-                          price: 50200
-                        },
-                        {
-                          id: 3,
-                          title: 'Operários',
-                          artistName: 'Tarsila do Amaral',
-                          price: 50200
-                        },
-                        {
-                          id: 4,
-                          title: 'Operários',
-                          artistName: 'Tarsila do Amaral',
-                          price: 50200
-                        },
-                        {
-                          id: 5,
-                          title: 'Operários',
-                          artistName: 'Tarsila do Amaral',
-                          price: 50200
-                        },
-                        {
-                          id: 6,
-                          title: 'Operários',
-                          artistName: 'Tarsila do Amaral',
-                          price: 50200
-                        },
-                      ])
+
                       setSelectedStatusChart("data4")
                     }}
                   >
@@ -163,44 +164,6 @@ function All(props) {
                       active: setSelectedStatusChart === "data5"
                     })}
                     onClick={() => {
-                      setStatusData([
-                        {
-                          id: 1,
-                          title: 'Operários',
-                          artistName: 'Tarsila do Amaral',
-                          price: 50200
-                        },
-                        {
-                          id: 2,
-                          title: 'Operários',
-                          artistName: 'Tarsila do Amaral',
-                          price: 50200
-                        },
-                        {
-                          id: 3,
-                          title: 'Operários',
-                          artistName: 'Tarsila do Amaral',
-                          price: 50200
-                        },
-                        {
-                          id: 4,
-                          title: 'Operários',
-                          artistName: 'Tarsila do Amaral',
-                          price: 50200
-                        },
-                        {
-                          id: 5,
-                          title: 'Operários',
-                          artistName: 'Tarsila do Amaral',
-                          price: 50200
-                        },
-                        {
-                          id: 6,
-                          title: 'Operários',
-                          artistName: 'Tarsila do Amaral',
-                          price: 50200
-                        },
-                      ])
                       setSelectedStatusChart("data5")
                     }}
                   >
@@ -217,10 +180,8 @@ function All(props) {
                 <Table className="tablesorter" responsive>
                   <thead className="text-primary">
                   <tr>
-                    <th>Name</th>
-                    <th>Country</th>
-                    <th>City</th>
-                    <th className="text-center">Salary</th>
+                    <th>Title</th>
+                    <th>Status</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -237,46 +198,32 @@ function All(props) {
                   {/*  })*/}
                   {/*  : null}*/}
                   <tr>
-                    <td>Dakota Rice</td>
-                    <td>Niger</td>
-                    <td>Oud-Turnhout</td>
-                    <td className="text-center">$36,738</td>
+                    <td>Operarios</td>
+                    <td>Emprestado</td>
                   </tr>
                   <tr>
                     <td>Minerva Hooper</td>
-                    <td>Curaçao</td>
-                    <td>Sinaai-Waas</td>
-                    <td className="text-center">$23,789</td>
+                    <td>Emprestado</td>
                   </tr>
                   <tr>
                     <td>Sage Rodriguez</td>
-                    <td>Netherlands</td>
-                    <td>Baileux</td>
-                    <td className="text-center">$56,142</td>
+                    <td>Próprio</td>
                   </tr>
                   <tr>
                     <td>Philip Chaney</td>
-                    <td>Korea, South</td>
-                    <td>Overland Park</td>
-                    <td className="text-center">$38,735</td>
+                    <td>Próprio</td>
                   </tr>
                   <tr>
                     <td>Doris Greene</td>
-                    <td>Malawi</td>
-                    <td>Feldkirchen in Kärnten</td>
-                    <td className="text-center">$63,542</td>
+                    <td>Emprestado</td>
                   </tr>
                   <tr>
                     <td>Mason Porter</td>
-                    <td>Chile</td>
-                    <td>Gloucester</td>
-                    <td className="text-center">$78,615</td>
+                    <td>Emprestado</td>
                   </tr>
                   <tr>
                     <td>Jon Porter</td>
-                    <td>Portugal</td>
-                    <td>Gloucester</td>
-                    <td className="text-center">$98,615</td>
+                    <td>Próprio</td>
                   </tr>
                   </tbody>
                 </Table>
